@@ -9,15 +9,21 @@ RUN su root && apt-get update \
 
 # Docker In Docker
 
+
+WORKDIR /root
+
 # Shell env
 RUN sudo apt-get -y install tmux
 RUN sudo apt-get -y install zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Editor
-# RUN sudo apt-get -y install neovim
+ENV ZSH_CUSTOM /root/.oh-my-zsh/custom
 
+RUN git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1 \
+ && ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" 
 COPY .zshrc .zshrc
 
-WORKDIR /home/root
+# IDE
 
+
+CMD tmux 
