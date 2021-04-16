@@ -14,7 +14,13 @@ WORKDIR /root
 
 # Shell env
 RUN sudo apt-get -y install tmux
-RUN sudo apt-get -y install zsh
+
+COPY .tmux.conf .tmux.conf
+COPY .tmux/ .tmux/
+
+RUN sudo apt-get -y install zsh \
+  && chsh -s $(which zsh) \
+  && sudo apt-get -y install fonts-powerline
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ENV ZSH_CUSTOM /root/.oh-my-zsh/custom
