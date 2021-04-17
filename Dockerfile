@@ -1,5 +1,4 @@
 FROM debian:10
-
 # Package Manager
 RUN su root && apt-get update \
   && apt-get -y install apt-utils \
@@ -42,6 +41,18 @@ RUN git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/t
 COPY .zshrc .zshrc
 
 # IDE: nvim
+RUN curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage \
+  && chmod u+x nvim.appimage \
+  && ./nvim.appimage --appimage-extract \
+  && ./squashfs-root/AppRun --version \
+  && mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim
 
+RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+COPY .vimrc .vimrc
+
+RUN mkdir .config/
+COPY .config/nvim .config/nvim
 
 CMD tmux 

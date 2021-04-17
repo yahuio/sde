@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/yahu577/ws/freqtrade-strategies'
+let g:netrw_dirhist_2='/home/yahu577/ws/freqtrade-strategies/user_data'
+let g:netrw_dirhist_3='/home/yahu577/ws/freqtrade-strategies/user_data/strategies'
+let g:netrw_dirhist_4='/home/yahu577/ws/freqtrade-strategies'
+let g:netrw_dirhist_5='/home/yahu577/ws/freqtrade-strategies/user_data'
+let g:netrw_dirhist_6='/home/yahu577/ws/freqtrade-strategies/user_data/strategies'
+let g:netrw_dirhist_7='/home/yahu577/ws/freqtrade-strategies'
+let g:netrw_dirhist_8='/home/yahu577/ws/freqtrade-strategies/user_data'
+let g:netrw_dirhist_9='/home/yahu577/ws/freqtrade-strategies'
