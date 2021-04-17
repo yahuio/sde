@@ -58,4 +58,10 @@ COPY .vimrc .vimrc
 RUN mkdir .config/
 COPY .config/nvim .config/nvim
 
-CMD tmux 
+RUN nvim --headless +PlugInstall +qall
+
+VOLUME /root/ws
+ENV WORKSPACE /root/ws
+
+COPY ide.sh ide.sh
+CMD /root/ide.sh
