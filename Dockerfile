@@ -26,6 +26,9 @@ WORKDIR /root
 # Shell env
 RUN sudo apt-get -y install tmux
 
+ENV LANG en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+
 COPY .tmux.conf .tmux.conf
 COPY .tmux/ .tmux/
 
