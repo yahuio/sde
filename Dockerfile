@@ -26,12 +26,6 @@ WORKDIR /root
 # Shell env
 RUN sudo apt-get -y install tmux
 
-ENV LANG en_US.UTF-8
-ENV LC_CTYPE en_US.UTF-8
-
-COPY .tmux.conf .tmux.conf
-COPY .tmux/ .tmux/
-
 RUN sudo apt-get -y install zsh \
   && chsh -s $(which zsh) \
   && sudo apt-get -y install fonts-powerline
@@ -41,6 +35,12 @@ ENV ZSH_CUSTOM /root/.oh-my-zsh/custom
 
 RUN git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1 \
  && ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" 
+
+ENV LANG en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+
+COPY .tmux.conf .tmux.conf
+COPY .tmux/ .tmux/
 COPY .zshrc .zshrc
 
 # IDE: nvim
@@ -51,17 +51,14 @@ RUN curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.app
   && mv squashfs-root / && ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
+RUN mkdir .config
 COPY .vimrc .vimrc
-
-RUN mkdir .config/
 COPY .config/nvim .config/nvim
+COPY ide.sh ide.sh
 
 RUN nvim --headless +PlugInstall +qall
 
-VOLUME /root/ws
-ENV WORKSPACE /root/ws
+VOLUME /ws
 
-COPY ide.sh ide.sh
-CMD /root/ide.sh
+CMD WORKSPACE=/ws /root/ide.sh
