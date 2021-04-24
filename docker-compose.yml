@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  ide:
+    build: .
+    volumes:
+      - ide-ws:/home/yahu577/ws
+volumes:
+  ide-ws:
+    driver: lebokus/bindfs:latest
+    driver_opts:
+      sourcePath: "/home/yahu577/ws"
+      map: "${UID:-1000}/1000:@${GID:-1000}/@1000"

@@ -17,9 +17,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree' 
 Plug 'ryanoasis/vim-devicons'
 
+" telescope - fuzzy search
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+" syntax - jsonc
+Plug 'kevinoid/vim-jsonc'
+
+" language server 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
