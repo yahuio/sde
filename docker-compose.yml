@@ -1,13 +1,15 @@
 version: "3.4"
 
 services:
-  ide:
-    build: .
+  sde:
+    image: yahu.io/sde:latest
+    build: ./sde/
     volumes:
-      - ide-ws:/home/yahu577/ws
+      - ws:/home/yahu/ws
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
-  ide-ws:
+  ws:
     driver: lebokus/bindfs:latest
     driver_opts:
-      sourcePath: "/home/yahu577/ws"
+      sourcePath: "${SDE_WS}"
       map: "${UID:-1000}/1000:@${GID:-1000}/@1000"

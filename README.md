@@ -1,21 +1,20 @@
-# yahuRDE
+# yahuSDE
 
-A personal pre-configured shell development environment. Develop anywhere via ssh/mosh access. I'm using this with an ipad using Blink app, remoting to an instance on cloud providers.
+A personal pre-configured shell development environment. Allowing me to develop anywhere with ssh/mosh access. I'm using this with an ipad using Blink app, remoting to an instance on cloud providers.
 
 ## Prerequsite
 
 - Docker
+- Docker volume driver lebokus/bindfs
+```
+docker plugin install lebokus/bindfs
+```
 
 ## Usage
 
-Start your ide with your workspsace path:
+Run the starting script
 ```
-docker run -ti yahu.io/rde -v /ws:{your workspace}
-```
-
-To enable docker commands using host docker daemon
-```
-docker run -ti yahu.io/rde -v /ws:{your workspace} -v /var/run/docker.sock:/var/run/docker.sock
+SDE_WS={/path/to/ws} run.sh
 ```
 
 # Features/Setup
@@ -26,9 +25,13 @@ docker run -ti yahu.io/rde -v /ws:{your workspace} -v /var/run/docker.sock:/var/
 - neovim 
   - NERDTree
   - telescope.nvim
+  - golang
+    - coc
+    - coc-go
+- host docker
 
 # Roadmap
 [ ] golang 
 [ ] nodejs
-[ ] 
+[ ] theme 
 
